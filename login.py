@@ -24,9 +24,10 @@ password = driver.find_element(By.ID, "password")
 login_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Sign in')]")
 
 email_input.send_keys("jioclyde21@gmail.com")
-password.send_keys("Dost@1234")
+password.send_keys("Dost@123456")
 login_button.click()
 time.sleep(5)
 
 input("Press Enter to exit and close the browser...")
 driver.quit()
+
