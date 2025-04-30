@@ -403,8 +403,6 @@ Confirm_pass = driver.find_element(By.XPATH, '//*[@id="new_password_confirmation
 Current_pass.send_keys("Dost@123")
 New_pass.send_keys("Dost@123")
 Confirm_pass.send_keys("Dost@123")
-Save.click()
-time.sleep(2)
 try:
     assert Current_pass.get_attribute("value") == "Dost@123", "Current password mismatch"
     assert New_pass.get_attribute("value") == "Dost@123", "New password mismatch"
@@ -414,25 +412,28 @@ except AssertionError as e:
     print(f"Password fields assertion failed: {e}")
 else:
     print("Password change process completed.")
+Save.click()
+time.sleep(2)
 
 ok_button = driver.find_element(By.XPATH, "//button[@class='swal2-confirm swal2-styled' and text()='OK']")
 ok_button.click()
 time.sleep(2)
 
-email_input = wait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
-password = driver.find_element(By.ID, "password")
-login_button = driver.find_element(By.XPATH, '//button[text()="Login"]')
-time.sleep(2)
-email_input.send_keys("")
-password.send_keys("")
-#try:
-#    assert email_input.get_attribute("value") == "sjjinahon@gmail.com", "Email input mismatch"
-#    assert password.get_attribute("value") == "Dost@123", "Password input mismatch"
-#except AssertionError as e:
-#    print(Assertion failed: {e}")
-
-login_button.click()
+email_input6 = wait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
+password6 = driver.find_element(By.ID, "password")
+login_button6 = driver.find_element(By.XPATH, '//button[text()="Login"]')
+email_input6.send_keys("sjjinahon@gmail.com")
+password6.send_keys("Dost@123")
+try:
+    assert email_input6.get_attribute("value") == "sjjinahon@gmail.com", "Email input mismatch"
+    assert password6.get_attribute("value") == "Dost@123", "Password input mismatch"
+    print("Logged in Successfully")
+except AssertionError as e:
+    print(f"7th attempt Assertion failed: {e}")
+login_button6.click()
 time.sleep(3)
+
+print("Successfully entered the page.")
 
 Ellipsissss = driver.find_element(By.XPATH, '//*[@id="applications_table"]/tbody/tr[1]/td[6]/div/button')
 driver.execute_script("arguments[0].click();", Ellipsissss)
@@ -444,6 +445,7 @@ Alist = wait(driver, 4).until(EC.visibility_of_element_located((By.XPATH, "//*[@
 print("Found Assign to:", assign_to.text)
 driver.execute_script("arguments[0].style.border='2px solid gray'", Alist)
 time.sleep(4)
+driver.execute_script("arguments[0].style.border=''", assign_to)
 
 Edit = driver.find_element(By.XPATH, '//*[@id="edit-menu-item"]')
 driver.execute_script("arguments[0].style.border='2px solid gray'", Edit)
@@ -453,6 +455,7 @@ driver.execute_script("arguments[0].click();", Edit)
 time.sleep(3)
 driver.back()
 time.sleep(2)
+driver.execute_script("arguments[0].style.border=''", Edit)
 
 Ellipsissss = driver.find_element(By.XPATH, '//*[@id="applications_table"]/tbody/tr[1]/td[6]/div/button')
 driver.execute_script("arguments[0].click();", Ellipsissss)
@@ -466,6 +469,7 @@ time.sleep(3)
 Close = driver.find_element(By.XPATH, '//*[@id="tracking-modal"]/div/div/div[1]/button')
 driver.execute_script("arguments[0].click();", Close)
 time.sleep(3)
+driver.execute_script("arguments[0].style.border=''", Track)
 
 Ellipsissss = driver.find_element(By.XPATH, '//*[@id="applications_table"]/tbody/tr[1]/td[6]/div/button')
 driver.execute_script("arguments[0].click();", Ellipsissss)
@@ -479,6 +483,7 @@ time.sleep(3)
 Close_A = driver.find_element(By.XPATH, '//*[@id="attachments-modal"]/div/div/div[1]/button')
 driver.execute_script("arguments[0].click();", Close_A)
 time.sleep(3)
+driver.execute_script("arguments[0].style.border=''", Attach)
 
 Ellipsissss = driver.find_element(By.XPATH, '//*[@id="applications_table"]/tbody/tr[1]/td[6]/div/button')
 driver.execute_script("arguments[0].click();", Ellipsissss)
@@ -492,6 +497,7 @@ time.sleep(3)
 Cancel = driver.find_element(By.XPATH, "//button[@class='swal2-cancel swal2-styled' and text()='Cancel']")
 driver.execute_script("arguments[0].click();", Cancel)
 time.sleep(3)
+driver.execute_script("arguments[0].style.border=''", Delete)
 
 No = driver.find_element(By.XPATH, '//span[contains(@class, "ascending") and contains(@class, "icon-[solar--sort-vertical-bold-duotone]")]')
 driver.execute_script("arguments[0].click();", No)
@@ -528,10 +534,9 @@ Status1 = driver.find_element(By.XPATH, '//span[text()="Status"]')
 driver.execute_script("arguments[0].click();", Status1)
 time.sleep(2)
 
-# Click to open the dropdown (optional visual action)
+
 dropdown_element = driver.find_element(By.ID, "council_filter")
 dropdown_element.click()
-# Then select using Select
 dropdown = Select(dropdown_element)
 dropdown.select_by_visible_text("DOST-CO")
 time.sleep(1)
@@ -543,6 +548,7 @@ dropdown.select_by_visible_text("PCIEERD")
 time.sleep(1)
 dropdown = Select(dropdown_element)
 dropdown.select_by_visible_text("PCHRD")
+time.sleep(1)
 
 dropdown1 = driver.find_element(By.ID, 'status_filter')
 dropdown1.click()
